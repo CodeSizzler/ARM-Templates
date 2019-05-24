@@ -1,0 +1,220 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "LabstrType": {
+      "type": "string",
+      "defaultValue": "Standard_LRS",
+      "allowedValues": [
+        "Standard_LRS",
+        "Standard_ZRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Premium_LRS"
+      ]
+    },
+    "LabVmName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "LabVmAdminUserName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "LabVmAdminPassword": {
+      "type": "securestring"
+    },
+    "LabVmWindowsOSVersion": {
+      "type": "string",
+      "defaultValue": "2016-Datacenter",
+      "allowedValues": [
+        "2008-R2-SP1",
+        "2016-Datacenter",
+        "2012-R2-Datacenter",
+        "Windows-Server-Technical-Preview"
+      ]
+    }
+  },
+  "variables": {
+    "LabstrName": "[uniqueString(resourceGroup().id)]",
+    "LabvnetPrefix": "10.0.0.0/16",
+    "LabvnetSubnet1Name": "Subnet-1",
+    "LabvnetSubnet1Prefix": "10.0.0.0/24",
+    "LabvnetSubnet2Name": "Subnet-2",
+    "LabvnetSubnet2Prefix": "10.0.1.0/24",
+    "LabVmImagePublisher": "MicrosoftWindowsServer",
+    "LabVmImageOffer": "WindowsServer",
+    "LabVmOSDiskName": "LabVmOSDisk",
+    "LabVmVmSize": "Standard_D2_v2",
+    "LabVmVnetID": "[resourceId('Microsoft.Network/virtualNetworks', 'Labvnet')]",
+    "LabVmSubnetRef": "[concat(variables('LabVmVnetID'), '/subnets/', variables('LabvnetSubnet1Name'))]",
+    "LabVmStorageAccountContainerName": "vhds",
+    "LabVmNicName": "[concat(parameters('LabVmName'), 'NetworkInterface')]",
+    "labpipName": "labpip"
+
+  },
+  "resources": [
+    {
+      "name": "[variables('LabstrName')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-01-01",
+      "sku": {
+        "name": "[parameters('LabstrType')]"
+      },
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "Labstr"
+      },
+      "kind": "Storage"
+    },
+    {
+      "name": "Labvnet",
+      "type": "Microsoft.Network/virtualNetworks",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "Labvnet"
+      },
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('LabvnetPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('LabvnetSubnet1Name')]",
+            "properties": {
+              "addressPrefix": "[variables('LabvnetSubnet1Prefix')]"
+            }
+          },
+          {
+            "name": "[variables('LabvnetSubnet2Name')]",
+            "properties": {
+              "addressPrefix": "[variables('LabvnetSubnet2Prefix')]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[variables('LabVmNicName')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [
+        "[resourceId('Microsoft.Network/virtualNetworks', 'Labvnet')]",
+        "[resourceId('Microsoft.Network/publicIPAddresses', variables('labpipName'))]"
+      ],
+      "tags": {
+        "displayName": "LabVmNic"
+      },
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "subnet": {
+                "id": "[variables('LabVmSubnetRef')]"
+              },
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('labpipName'))]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "[parameters('LabVmName')]",
+      "type": "Microsoft.Compute/virtualMachines",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2015-06-15",
+      "dependsOn": [
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('LabstrName'))]",
+        "[resourceId('Microsoft.Network/networkInterfaces', variables('LabVmNicName'))]"
+      ],
+      "tags": {
+        "displayName": "LabVm"
+      },
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[variables('LabVmVmSize')]"
+        },
+        "osProfile": {
+          "computerName": "[parameters('LabVmName')]",
+          "adminUsername": "[parameters('LabVmAdminUsername')]",
+          "adminPassword": "[parameters('LabVmAdminPassword')]"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "[variables('LabVmImagePublisher')]",
+            "offer": "[variables('LabVmImageOffer')]",
+            "sku": "[parameters('LabVmWindowsOSVersion')]",
+            "version": "latest"
+          },
+          "osDisk": {
+            "name": "LabVmOSDisk",
+            "vhd": {
+              "uri": "[concat(reference(resourceId('Microsoft.Storage/storageAccounts', variables('LabstrName')), '2016-01-01').primaryEndpoints.blob, variables('LabVmStorageAccountContainerName'), '/', variables('LabVmOSDiskName'), '.vhd')]"
+            },
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('LabVmNicName'))]"
+            }
+          ]
+        }
+      },
+      "resources": [
+        {
+          "name": "labsetup",
+          "type": "extensions",
+          "location": "[resourceGroup().location]",
+          "apiVersion": "2016-03-30",
+          "dependsOn": [
+            "[resourceId('Microsoft.Compute/virtualMachines', parameters('LabVmName'))]"
+          ],
+          "tags": {
+            "displayName": "labsetup"
+          },
+          "properties": {
+            "publisher": "Microsoft.Compute",
+            "type": "CustomScriptExtension",
+            "typeHandlerVersion": "1.4",
+            "autoUpgradeMinorVersion": true,
+            "settings": {
+              "fileUris": [
+                "https://codesizzlerartifacts.blob.core.windows.net/artifacts/javaextensionpack.ps1"
+              ],
+              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File javaextensionpack.ps1"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "[variables('labpipName')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-03-30",
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "labpip"
+      },
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "dnsSettings": {
+          "domainNameLabel": "[concat('labpip', uniqueString(resourceGroup().id))]"
+        }
+      }
+    }],
+  "outputs": {}
+}
