@@ -192,9 +192,9 @@
             "autoUpgradeMinorVersion": true,
             "settings": {
               "fileUris": [
-                "https://codesizzlerartifacts.blob.core.windows.net/artifacts/javaextensionpack.ps1"
+                "https://github.com/CodeSizzler/ARM-Templates/blob/master/CosmosDBLab/infrastructure.ps1"
               ],
-              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File javaextensionpack.ps1"
+              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File infrastructure.ps1"
             }
           }
         }
