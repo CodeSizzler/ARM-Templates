@@ -192,7 +192,7 @@
             "autoUpgradeMinorVersion": true,
             "settings": {
               "fileUris": [
-                "https://github.com/CodeSizzler/ARM-Templates/tree/master/CosmosDBLab"
+                "https://raw.githubusercontent.com/CodeSizzler/ARM-Templates/master/CosmosDBLab"
               ],
               "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File infrastructure.ps1"
             }
