@@ -41,7 +41,6 @@
       "LabvnetSubnet2Prefix": "10.0.1.0/24",
       "LabVmImagePublisher": "MicrosoftWindowsServer",
       "LabVmImageOffer": "WindowsServer",
-      "LabVmOSDiskName": "LabVmOSDisk",
       "LabVmVnetID": "[resourceId('Microsoft.Network/virtualNetworks', 'Labvnet')]",
       "LabVmSubnetRef": "[concat(variables('LabVmVnetID'), '/subnets/', variables('LabvnetSubnet1Name'))]",
       "LabVmNicName": "[concat(parameters('LabVmName'), 'NetworkInterface')]",
