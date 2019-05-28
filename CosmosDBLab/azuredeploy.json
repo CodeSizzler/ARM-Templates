@@ -60,7 +60,7 @@
           {
             "id": "[uniquestring(resourceGroup().id)]",
             "failoverPriority": 0,
-            "locationName": "South India"
+            "locationName": "[resourceGroup().location]"
           },
           {
             "id": "[concat('cosmosdb',uniquestring(resourceGroup().id))]",
