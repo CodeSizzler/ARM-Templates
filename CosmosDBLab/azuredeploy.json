@@ -30,6 +30,7 @@
       "allowedValues": [
         "2008-R2-SP1",
         "2016-Datacenter",
+        "2019-Datacenter",
         "2012-R2-Datacenter",
         "Windows-Server-Technical-Preview"
       ]
