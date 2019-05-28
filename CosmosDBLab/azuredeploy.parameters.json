@@ -13,6 +13,9 @@
     },
     "LabVmWindowsOSVersion": {
       "value": "2016-Datacenter"
+    },
+     "LabVmVmSize": {
+      "value": "Ds2_v2"
     }
   }
 }
