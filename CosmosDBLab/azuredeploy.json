@@ -60,12 +60,12 @@
             {
               "id": "[uniquestring(resourceGroup().id)]",
               "failoverPriority": 0,
-              "locationName": "[uniquestring(resourceGroup().id)]"
+              "locationName": "[resourceGroup().location]"
             },
             {
               "id": "[uniquestring(resourceGroup().id)]",
               "failoverPriority": 1,
-              "locationName": "[uniquestring(resourceGroup().id)]"
+              "locationName": "Central US"
             }
           ],
           "enableMultipleWriteLocations": false,
