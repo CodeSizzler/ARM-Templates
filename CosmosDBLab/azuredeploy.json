@@ -28,8 +28,8 @@
         "type": "string",
         "defaultValue": "Standard_D2_v2",
         "allowedValues": [
-          "Standard_D2_v2",
-          "Standard_D2_v3"
+          "Ds2_v2",
+          "Ds3_v2"
         ]
       }
     },
