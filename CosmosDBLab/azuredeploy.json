@@ -34,6 +34,14 @@
         "2012-R2-Datacenter",
         "Windows-Server-Technical-Preview"
       ]
+    },
+    "LabVmVmSize": {
+      "type": "string",
+      "defaultValue": "Standard_D2_v2",
+      "allowedValues": [
+        "Standard_D2_v2",
+        "Standard_D2_v3"
+      ]
     }
   },
   "variables": {
@@ -46,7 +54,6 @@
     "LabVmImagePublisher": "MicrosoftWindowsServer",
     "LabVmImageOffer": "WindowsServer",
     "LabVmOSDiskName": "LabVmOSDisk",
-    "LabVmVmSize": "Standard_D2_v2",
     "LabVmVnetID": "[resourceId('Microsoft.Network/virtualNetworks', 'Labvnet')]",
     "LabVmSubnetRef": "[concat(variables('LabVmVnetID'), '/subnets/', variables('LabvnetSubnet1Name'))]",
     "LabVmStorageAccountContainerName": "vhds",
@@ -143,7 +150,7 @@
       },
       "properties": {
         "hardwareProfile": {
-          "vmSize": "[variables('LabVmVmSize')]"
+          "vmSize": "[parameters('LabVmVmSize')]"
         },
         "osProfile": {
           "computerName": "[parameters('LabVmName')]",
