@@ -58,14 +58,14 @@
           "databaseAccountOfferType": "Standard",
           "locations": [
             {
-              "id": "[concat('cosmosdb',uniquestring(resourceGroup().id))]",
+              "id": "[uniquestring(resourceGroup().id)]",
               "failoverPriority": 0,
-              "locationName": "[resourceGroup().location]"
+              "locationName": "[uniquestring(resourceGroup().id)]"
             },
             {
-              "id": "[concat('cosmosdb1',uniquestring(resourceGroup().id))]",
+              "id": "[uniquestring(resourceGroup().id)]",
               "failoverPriority": 1,
-              "locationName": "[resourceGroup().location]"
+              "locationName": "[uniquestring(resourceGroup().id)]"
             }
           ],
           "enableMultipleWriteLocations": false,
