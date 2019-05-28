@@ -27,5 +27,3 @@ function Disable-ieESC {
     Write-Host "IE Enhanced Security Configuration (ESC) has been disabled." -ForegroundColor Green
 }
 Disable-ieESC
-
-code --install-extension vscjava.vscode-java-pack
