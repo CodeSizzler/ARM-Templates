@@ -52,18 +52,18 @@
       "apiVersion": "2015-04-08",
       "kind": "GlobalDocumentDB",
       "type": "Microsoft.DocumentDb/databaseAccounts",
-      "name": "[concat('cosmosdb',uniquestring(resourceGroup().location))]",
+      "name": "[concat('cosmosdb',uniquestring(resourceGroup().id))]",
       "location": "[resourceGroup().location]",
       "properties": {
         "databaseAccountOfferType": "Standard",
         "locations": [
           {
-            "id": "[uniquestring(resourceGroup().id)]",
+            "id": "[concat('cosmosdb0',uniquestring(resourceGroup().id))]",
             "failoverPriority": 0,
             "locationName": "[resourceGroup().location]"
           },
           {
-            "id": "[concat('cosmosdb',uniquestring(resourceGroup().id))]",
+            "id": "[concat('cosmosdb1',uniquestring(resourceGroup().id))]",
             "failoverPriority": 1,
             "locationName": "East US 2"
           }
