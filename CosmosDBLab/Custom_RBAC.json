@@ -1,16 +1,29 @@
 {
-    "Name":  "CodeSizzler Custom RBAC",
-    "Id":  null,
-    "IsCustom":  true,
-    "Description":  "CodeSizzler Custom Role.",
-    "Actions":  [
-                    "Microsoft.Authorization/*/read",                    
-                    "Microsoft.DataFactory/factories/*",
-                    "Microsoft.DocumentDB/databaseAccounts/*",                
-                    "Microsoft.Resources/deployments/*",
-                    "Microsoft.Resources/subscriptions/resourceGroups/read"
-                ],
-    "NotActions":  [
-                   
-                   ]
+  "Name": "CodeSizzler Custom RBAC",
+  "Id": null,
+  "IsCustom": true,
+  "Description": "CodeSizzler Custom Role.",
+  "Actions": [
+    "Microsoft.Authorization/*/read",
+    "Microsoft.DataFactory/factories/*",
+    "Microsoft.Resources/deployments/*",
+    "Microsoft.Resources/subscriptions/resourceGroups/read",
+    "Microsoft.DocumentDB/databaseAccounts/apis/databases/containers/delete",
+    "Microsoft.DocumentDB/databaseAccounts/apis/databases/containers/read",
+    "Microsoft.DocumentDB/databaseAccounts/apis/databases/containers/settings/throughput/read",
+    "Microsoft.DocumentDB/databaseAccounts/apis/databases/containers/settings/throughput/write",
+    "Microsoft.DocumentDB/databaseAccounts/apis/databases/containers/write",
+    "Microsoft.DocumentDB/databaseAccounts/apis/databases/read",
+    "Microsoft.DocumentDB/databaseAccounts/apis/databases/settings/throughput/read",
+    "Microsoft.DocumentDB/databaseAccounts/apis/databases/settings/throughput/write",
+    "Microsoft.DocumentDB/databaseAccounts/failoverPriorityChange/action",
+    "Microsoft.DocumentDB/databaseAccounts/listConnectionStrings/action",
+    "Microsoft.DocumentDB/databaseAccounts/listKeys/action",
+    "Microsoft.DocumentDB/databaseAccounts/offlineRegion/action",
+    "Microsoft.DocumentDB/databaseAccounts/onlineRegion/action",
+    "Microsoft.DocumentDB/databaseAccounts/read"
+  ],
+  "NotActions": [
+
+  ]
 }
