@@ -65,7 +65,7 @@
           {
             "id": "[concat('cosmosdb',uniquestring(resourceGroup().id))]",
             "failoverPriority": 1,
-            "locationName": "Central India"
+            "locationName": "East US 2"
           }
         ],
         "enableMultipleWriteLocations": false,
