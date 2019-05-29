@@ -24,7 +24,6 @@
                     "Microsoft.Resources/subscriptions/resourceGroups/read"
                 ],
     "NotActions":  [
-                    "Microsoft.DocumentDB/databaseAccounts/apis/databases/write",
-                    "Microsoft.DocumentDB/databaseAccounts/apis/databases/delete"
+                   
                    ]
 }
