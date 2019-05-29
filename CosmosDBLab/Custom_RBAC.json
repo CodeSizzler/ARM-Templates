@@ -4,13 +4,20 @@
     "IsCustom":  true,
     "Description":  "CodeSizzler Custom Role.",
     "Actions":  [
-                    "Microsoft.Authorization/*/read",                  
+                    "Microsoft.Authorization/*/read",
+                    "Microsoft.Compute/disks/*",
+                    "Microsoft.Compute/virtualMachines/*",
+                    "Microsoft.Compute/virtualMachines/extensions/*",
                     "Microsoft.DataFactory/factories/*",
-                    "Microsoft.DocumentDb/databaseAccounts/*",                    
+                    "Microsoft.DocumentDb/databaseAccounts/*",
+                    "Microsoft.Network/networkInterfaces/*",
+                    "Microsoft.Network/networkSecurityGroups/*",
+                    "Microsoft.Network/publicIPAddresses/*",
+                    "Microsoft.Network/virtualNetworks/*",
                     "Microsoft.Resources/deployments/*",
                     "Microsoft.Resources/subscriptions/resourceGroups/read"
                 ],
     "NotActions":  [
-                    "Microsoft.DocumentDB/databaseAccounts/apis/databases/write"
+
                    ]
 }
