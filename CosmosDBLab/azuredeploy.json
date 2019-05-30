@@ -226,7 +226,7 @@
     "value": "[parameters('LabVmName')]"
     },
     "LabVmDNSName": {    
-      "type": "string"
+      "type": "string",
       "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('labpipName'))).dnsSettings.fqdn]",        
     },
        "VMUserName": {
