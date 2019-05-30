@@ -44,7 +44,8 @@
       "LabVmVnetID": "[resourceId('Microsoft.Network/virtualNetworks', 'Labvnet')]",
       "LabVmSubnetRef": "[concat(variables('LabVmVnetID'), '/subnets/', variables('LabvnetSubnet1Name'))]",
       "LabVmNicName": "[concat(parameters('LabVmName'), 'NetworkInterface')]",
-      "labpipName": "labpip"
+      "labpipName": "labpip",
+      "dot" : "."
 
     },
     "resources": [
@@ -228,7 +229,7 @@
     },
       "DNSName": {
     "type": "string",
-    "value": "[concat('labpip', uniqueString(resourceGroup().id)),'.',resourceGroup().location,'.cloudapp.azure.com']"
+    "value": "[concat('labpip', uniqueString(resourceGroup().id)),[variables('dot')],resourceGroup().location,[variables('dot')],'cloudapp.azure.com']"
     },
        "VMUserName": {
     "type": "string",
