@@ -225,9 +225,9 @@
     "type": "string",
     "value": "[parameters('LabVmName')]"
     },
-      "DNSName": {
-    "type": "string",
-    "value": "[concat('labpip',uniqueString(resourceGroup().id)),'.',resourceGroup().location,'.','cloudapp.azure.com')]"
+    "LabVmDNSName": {    
+      "type": "string"
+      "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('labpipName'))).dnsSettings.fqdn]",        
     },
        "VMUserName": {
     "type": "string",
