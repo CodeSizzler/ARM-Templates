@@ -229,7 +229,7 @@
     },
       "DNSName": {
     "type": "string",
-    "value": "[concat('labpip', uniqueString(resourceGroup().id)),[variables('dot')],resourceGroup().location,[variables('dot')],'cloudapp.azure.com']"
+    "value": "[concat('labpip', uniqueString(resourceGroup().id)),[variables('dot')],resourceGroup().location,[variables('dot')],'cloudapp.azure.com')]"
     },
        "VMUserName": {
     "type": "string",
