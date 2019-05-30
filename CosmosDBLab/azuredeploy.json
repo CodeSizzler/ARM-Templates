@@ -237,5 +237,5 @@
        "VMPassword": {
     "type": "string",
     "value": "demo@pass123"
-    },      
+    }     
   }
