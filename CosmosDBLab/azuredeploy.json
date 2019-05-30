@@ -220,5 +220,22 @@
         }
       }
     ],
-    "outputs": {}
+    "outputs": 
+    {
+      "VMName": {
+    "type": "string",
+    "value": "[parameters('LabVmName')]"
+    },
+      "DNSName": {
+    "type": "string",
+    "value": "[concat('labpip', uniqueString(resourceGroup().id))]"
+    },
+       "VMUserName": {
+    "type": "string",
+    "value": "demouser"
+    },
+       "VMPassword": {
+    "type": "string",
+    "value": "demo@pass123"
+    },      
   }
