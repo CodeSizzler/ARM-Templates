@@ -6,8 +6,19 @@
     "Actions":  [
                     "Microsoft.Authorization/*/read",                    
                     "Microsoft.DataFactory/factories/*",
-                    "Microsoft.DocumentDb/databaseAccounts/*",                    
-                    "Microsoft.Resources/deployments/*",
+                    "Microsoft.DocumentDB/databaseAccounts/apis/databases/containers/delete",
+"Microsoft.DocumentDB/databaseAccounts/apis/databases/containers/read",
+"Microsoft.DocumentDB/databaseAccounts/apis/databases/containers/write",
+"Microsoft.DocumentDB/databaseAccounts/apis/databases/read",
+"Microsoft.DocumentDB/databaseAccounts/apis/databases/settings/throughput/read",
+"Microsoft.DocumentDB/databaseAccounts/apis/databases/settings/throughput/write",
+"Microsoft.DocumentDB/databaseAccounts/failoverPriorityChange/action",
+"Microsoft.DocumentDB/databaseAccounts/listConnectionStrings/action",
+"Microsoft.DocumentDB/databaseAccounts/listKeys/action",
+"Microsoft.DocumentDB/databaseAccounts/offlineRegion/action",
+"Microsoft.DocumentDB/databaseAccounts/onlineRegion/action",
+"Microsoft.DocumentDB/databaseAccounts/read",
+        "Microsoft.Resources/deployments/*",
                     "Microsoft.Resources/subscriptions/resourceGroups/read"
                 ],
     "NotActions":  [
