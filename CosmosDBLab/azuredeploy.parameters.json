@@ -9,7 +9,7 @@
       "value": "demouser"
     },
     "LabVmAdminPassword": {
-      "value": "demopass1234"
+      "value": "demopass$123"
     },
     "LabVmWindowsOSVersion": {
       "value": "2016-Datacenter"
